@@ -21,7 +21,8 @@ jobs:
     
     - name: Install dependencies
       run: |
-        pip install flask gunicorn requests flask-bootstrap flask-wtf pillow
+        pip install flask gunicorn requests flask-bootstrap flask-wtf pillow tensorflow keras
+        # или можно через requirements.txt: pip install -r requirements.txt
     
     - name: Run Flask app test
       run: |
