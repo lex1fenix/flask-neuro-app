@@ -1,0 +1,25 @@
+{% extends "bootstrap/base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block title %}Классификация изображений{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1>Загрузите изображение для распознавания</h1>
+    {{ wtf.quick_form(form, method="post", enctype="multipart/form-data", action="net") }}
+
+    {% if neurodic %}
+        <h2>Результаты классификации:</h2>
+        {% for key, value in neurodic.items() %}
+            <h3>{{ key }}: {{ "%.2f"|format(value*100) }}%</h3>
+        {% endfor %}
+    {% else %}
+        <h3>Нет результатов</h3>
+    {% endif %}
+
+    {% if image_name %}
+        <h2>Ваше изображение:</h2>
+        <img src="{{ image_name }}" width="300">
+    {% endif %}
+</div>
+{% endblock %}
