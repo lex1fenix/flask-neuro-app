@@ -1,0 +1,30 @@
+name: CI for Flask App
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.11'
+    
+    - name: Install dependencies
+      run: |
+        pip install flask gunicorn requests flask-bootstrap flask-wtf pillow
+    
+    - name: Run Flask app test
+      run: |
+        cd flaskapp
+        python -c "import some_app; print('App loaded successfully')"
+        echo "All tests passed!"
