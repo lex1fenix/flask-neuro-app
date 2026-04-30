@@ -11,21 +11,15 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v4
-    
+    - uses: actions/checkout@v4
     - name: Set up Python
       uses: actions/setup-python@v5
       with:
         python-version: '3.11'
-    
     - name: Install dependencies
       run: |
-        pip install flask gunicorn requests flask-bootstrap flask-wtf pillow tensorflow keras
-        # или можно через requirements.txt: pip install -r requirements.txt
-    
-    - name: Run Flask app test
+        pip install -r requirements.txt
+    - name: Test Flask app
       run: |
         cd flaskapp
-        python -c "import some_app; print('App loaded successfully')"
-        echo "All tests passed!"
+        python -c "from app_cross import app; print('App loaded successfully')"
